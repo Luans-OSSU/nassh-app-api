@@ -1,4 +1,4 @@
-export function succes(body) {
+export function success(body) {
     return buildResponse(200, body);
 }
 
@@ -9,7 +9,7 @@ export function failure(body) {
 function buildResponse(statusCode, body) {
     return {
         statusCode: statusCode,
-        header: {
+        headers: {
             'Access-Control-Allow-Origin': '*',
             'Access-Control-Allow-Credentials': true,
         },

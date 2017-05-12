@@ -1,10 +1,8 @@
 service: nassh-app-api
 
-# Use serverless-webpack plugin to transpile ES6/ES7
 plugins:
   - serverless-webpack
 
-# Enable auto-packing of external modules
 custom:
   webpackIncludeModules: true
 
@@ -12,7 +10,7 @@ provider:
   name: aws
   runtime: nodejs6.10
   stage: prod
-  region: us-west-2
+  region: eu-west-1
 
   iamRoleStatements:
     - Effect: Allow
@@ -24,7 +22,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:us-west-2:*:*"
+      Resource: "arn:aws:dynamodb:eu-west-1:*:*"
 
 functions:
   create:
@@ -35,4 +33,44 @@ functions:
           method: post
           cors: true
           authorizer:
-            arn: arn:aws:cognito-idp:us-west-2:990775084596:userpool/us-west-2_ELdLOPfJg
+            arn: arn:aws:cognito-idp:eu-west-1:990775084596:userpool/eu-west-1_dB4WqM0JF
+
+  get:
+    handler: get.main
+    events:
+      - http:
+          path: notes/{id}
+          method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:eu-west-1:990775084596:userpool/eu-west-1_dB4WqM0JF
+
+  list:
+    handler: list.main
+    events:
+      - http:
+          path: notes
+          method: get
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:eu-west-1:990775084596:userpool/eu-west-1_dB4WqM0JF
+
+  update:
+    handler: update.main
+    events:
+      - http:
+          path: notes/{id}
+          method: put
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:eu-west-1:990775084596:userpool/eu-west-1_dB4WqM0JF
+
+  delete:
+    handler: delete.main
+    events:
+      - http:
+          path: notes/{id}
+          method: delete
+          cors: true
+          authorizer:
+            arn: arn:aws:cognito-idp:eu-west-1:990775084596:userpool/eu-west-1_dB4WqM0JF

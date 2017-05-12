@@ -1,9 +1,11 @@
 {
-  "body": "{\"content\":\"hello world\",\"attachment\":\"hello.jpg\"}",
+  "pathParameters": {
+    "id": "f5e0c590-371c-11e7-8f83-7fa160c1c9b5"
+  },
   "requestContext": {
     "authorizer": {
       "claims": {
-        "sub": "USER-SUB-1234"
+        "sub": "USER-TES-123"
       }
     }
   }
